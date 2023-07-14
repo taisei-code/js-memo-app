@@ -1,3 +1,4 @@
+import NotesView from "/js/NotesView.js";
 import NotesAPI from "/js/NotesAPI.js";
 
 // NotesAPI.savaNote({
@@ -6,5 +7,12 @@ import NotesAPI from "/js/NotesAPI.js";
 //   body: "作成中",
 // });
 
+// インスタンス化 （NotesView）
+const app  = document.getElementById("app");
+const view = new NotesView(app, {
+  onNoteSelect() {
+    console.log("ノートが選択されました");
+  }
+});
+
 console.log(NotesAPI.getAllNotes());
-NotesAPI.deleteNote(755175);
