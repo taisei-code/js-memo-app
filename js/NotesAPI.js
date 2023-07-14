@@ -33,8 +33,15 @@ export default class NotesAPI {
   }
 
   // メモを削除するAPI
-  static deleteNote () {
+  static deleteNote(id) { 
+    /* 全てのメモを取得 */
+    const notes = NotesAPI.getAllNotes();
 
+    /* 削除ボタンを押したメモ以外を残す処理 */
+    const newNotes = notes.filter((note) => note.id !== id)
+
+    /* ローカルストレージに削除したメモ以外を保存 */
+    localStorage.setItem("notes", JSON.stringify(newNotes));
   }
 
 }
