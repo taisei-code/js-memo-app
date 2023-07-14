@@ -45,4 +45,42 @@ export default class NotesView {
       });
     });
   }
+
+  /* メモをサイドバーに出力する関数 */
+  _createListItemHTML(id, title, body, updated) {
+    /* プレビューに表示するのは60字まで */
+    const MAX_BODY_LENGTH = 60;
+
+
+    return `
+      <div class="notesList-item" data-note-id=${id}>
+        <div class="notesSmall-title">
+          ${title}
+        </div>
+        <div class="notesSmall-body">
+          ${body.substring(0, MAX_BODY_LENGTH)}
+          ${body.length > MAX_BODY_LENGTH ? "..." : ""}
+        </div>
+        <div class="notesSmall-updated">
+          ${updated.toLocaleString()}
+        </div>
+      </div>
+    `;
+  }
+
+  updateNoteList(notes) {
+    const notesListContainer = this.root.querySelector(".notesList");
+    
+    for (const note of notes) {
+      const html = this._createListItemHTML(
+        note.id,
+        note.title,
+        note.body,
+        new Date(note.updated)
+      )
+      notesListContainer.insertAdjacentHTML("beforeend", html);
+    }
+  }
+
+
 }
