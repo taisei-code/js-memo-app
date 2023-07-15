@@ -80,7 +80,24 @@ export default class NotesView {
       )
       notesListContainer.insertAdjacentHTML("beforeend", html);
     }
+
+    // メモの選択
+    notesListContainer.querySelectorAll(".notesList-item")
+      .forEach((noteListItem) => {
+
+        noteListItem.addEventListener("click", () => {
+          // console.log(noteListItem.dataset)
+          this.onNoteSelect(noteListItem.dataset.noteId);
+        });
+
+        // ダブルクリックしたとき
+        noteListItem.addEventListener("dblclick", () => {
+          const doDelete = confirm("本当にこのメモを削除しても？");
+
+          if (doDelete) {
+            this.onNoteDelete(noteListItem.dataset.noteId);
+          }
+        });
+      });
   }
-
-
 }
