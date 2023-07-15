@@ -100,4 +100,18 @@ export default class NotesView {
         });
       });
   }
+
+  /* メモをプレビューに表示 */
+  updateActiveNote(note) {
+    // プレビュー欄にメモの内容を表示する
+    this.root.querySelector(".notesTitle").value = note.title;
+    this.root.querySelector(".notesBody").value = note.body;
+    
+    // 選択したプレビューにハイライトを付ける
+    this.root.querySelector(`.notesList-item[data-note-id="${note.id}"]`)
+      .classList.add("notesList-item--selected");
+    
+
+  }
+
 }
